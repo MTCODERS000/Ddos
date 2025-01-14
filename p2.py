@@ -2,9 +2,9 @@ from instagrapi import Client
 import time
 import requests
 
-# Your credentials
-username = "your_username"
-password = "your_password"
+# Input credentials
+username = input("Enter your Instagram username: ")
+password = input("Enter your Instagram password: ")
 
 # Login to Instagram
 cl = Client()
@@ -27,7 +27,7 @@ while True:
         print(f"Image posted successfully with caption: {caption}")
         
         # Wait before posting again (you can adjust the sleep time as needed)
-        time.sleep(10)  # Adjust the sleep time (in seconds)
+        time.sleep(3)  # Adjust the sleep time (in seconds)
         
     except Exception as e:
         print(f"An error occurred: {e}")
